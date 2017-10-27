@@ -1,0 +1,11 @@
+library(DBI)
+con <- dbConnect(RSQLite::SQLite(), "~/analysis/lysimeter/data.sqlite")
+res <- dbSendQuery(con, "select * from results order by site, treatment, replicate, date;")
+data <- dbFetch(res)
+data$date <- as.Date(data$date)
+qplot(date, no3, data=data, geom='line') + facet_grid('treatment~replicate')
+qplot(date, tdn, data=data, geom='line') + facet_grid('treatment~replicate')
+qplot(date, doc, data=subset(data, date > as.Date('2015-5-1')), geom='line') + facet_grid('treatment~replicate') 
+qplot(date, tdp, data=data, geom='line') + facet_grid('treatment~replicate')
+dbDisconnect(con)
+  
