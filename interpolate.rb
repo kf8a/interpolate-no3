@@ -97,6 +97,7 @@ class Interpolator
         slope = diff / days
         # evaluate for each missing value
         (0..days).each do |day|
+          p [a[variable], diff, days, slope, day, a[variable] + slope * day]
           insert_interpolated(results, a, day,
                               variable => a[variable] + slope * day)
         end
@@ -109,7 +110,6 @@ class Interpolator
     File.delete('data.sqlite')
     db = Sequel.sqlite('data.sqlite', loggers: [Logger.new($stdout)])
 
-    db.extension(:sequel_3_dataset_methods) # define to_csv
     s = Roo::Spreadsheet.open(file)
     sheet = s.sheet(0)
 
