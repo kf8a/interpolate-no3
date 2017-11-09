@@ -10,12 +10,13 @@ require 'logger'
 class Interpolator
   def load(sheet, table)
     (2..sheet.last_row).collect do |row|
-      table.insert date: sheet.cell('C', row), site: sheet.cell('D', row),
-                   treatment: sheet.cell('E', row),
-                   replicate: sheet.cell('F', row),
-                   crop: sheet.cell('G', row),
-                   no3: sheet.cell('H', row), tdn: sheet.cell('I', row),
-                   doc: sheet.cell('J', row), tdp: sheet.cell('K', row)
+      table.insert date: sheet.cell('A', row),
+                   site: sheet.cell('B', row),
+                   treatment: sheet.cell('C', row),
+                   replicate: sheet.cell('D', row),
+                   crop: sheet.cell('E', row),
+                   no3: sheet.cell('F', row), tdn: sheet.cell('G', row),
+                   doc: sheet.cell('H', row), tdp: sheet.cell('I', row)
     end
   end
 
