@@ -107,7 +107,7 @@ class Interpolator
   end
 
   def interpolate(file)
-    File.delete('data.sqlite')
+    File.delete('data.sqlite') if File.exist?('data.sqlite')
     db = Sequel.sqlite('data.sqlite', loggers: [Logger.new($stdout)])
 
     s = Roo::Spreadsheet.open(file)
